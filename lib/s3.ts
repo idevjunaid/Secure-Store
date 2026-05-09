@@ -3,10 +3,8 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
+  // Lambda's execution role will automatically provide credentials
+  // No need to explicitly set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 });
 
 // Wrapper to maintain backward compatibility with v2 SDK interface
