@@ -24,6 +24,8 @@ export default $config({
     const site = new sst.aws.Nextjs("MyWeb", {
       link: [bucket],
       environment: {
+        AWS_S3_BUCKET_NAME: bucket.name,
+        NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
         STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY!,
         STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET!,
       },
