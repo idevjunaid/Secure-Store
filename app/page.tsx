@@ -13,6 +13,7 @@ export default async function Home() {
   try {
     const data = await s3.listObjectsV2({ Bucket: bucketName }).promise();
     files = (data.Contents || []).filter((obj: S3Object) => obj.Key !== undefined) as S3Object[];
+    console.log('S3 Files found:', files.map(f => ({ Key: f.Key, Size: f.Size })));
   } catch (err) { 
     console.error('Error fetching from S3:', err);
   }
@@ -30,6 +31,7 @@ export default async function Home() {
           Key: fileKey, 
           Expires: 3600 // 1 hour for preview
         });
+        console.log(`Generated URL for ${fileKey}:`, previewUrl);
       } catch (err) {
         console.error(`Error generating preview URL for ${fileKey}:`, err);
         previewUrl = '';
