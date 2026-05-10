@@ -29,7 +29,9 @@ export default async function Home() {
         previewUrl = await s3.getSignedUrl('getObject', { 
           Bucket: bucketName, 
           Key: fileKey, 
-          Expires: 3600 // 1 hour for preview
+          Expires: 3600, // 1 hour for preview
+          ResponseContentType: 'image/jpeg', // Explicitly set content type
+          ResponseContentDisposition: 'inline', // Display inline, not download
         });
         console.log(`Generated URL for ${fileKey}:`, previewUrl);
       } catch (err) {

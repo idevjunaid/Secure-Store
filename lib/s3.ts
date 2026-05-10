@@ -41,12 +41,14 @@ const s3 = {
     Key?: string; 
     Expires?: number;
     ResponseContentDisposition?: string;
+    ResponseContentType?: string;
   }) => {
     if (operation === 'getObject') {
       const command = new GetObjectCommand({
         Bucket: params.Bucket,
         Key: params.Key,
         ResponseContentDisposition: params.ResponseContentDisposition,
+        ResponseContentType: params.ResponseContentType,
       });
       return await getSignedUrl(s3Client, command, { expiresIn: params.Expires || 3600 });
     }
